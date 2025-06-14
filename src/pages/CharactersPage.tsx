@@ -175,9 +175,18 @@ export default function CharactersPage() {
         })}
       </Grid>
       {filtered.length < 1 && (
-        <Typography mt={2} textAlign="center">
-          No Result Found
-        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "60vh",
+          }}
+        >
+          <Typography mt={2} textAlign="center">
+            No Result Found
+          </Typography>
+        </Box>
       )}
 
       <Box mt={3} display="flex" justifyContent="center" alignItems="center">
