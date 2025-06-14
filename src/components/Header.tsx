@@ -3,7 +3,8 @@ import { useAuth } from "../hooks/useAuth";
 import { Link } from "react-router-dom";
 
 export const Header = () => {
-  const { logout } = useAuth();
+  const { logout, token } = useAuth();
+  if (!token) return null;
   return (
     <Stack
       direction="row"
@@ -14,7 +15,7 @@ export const Header = () => {
         px: 2,
         py: 1,
         flexWrap: "wrap",
-        width: "100%",
+        width: "99vw",
         boxSizing: "border-box",
       }}
     >

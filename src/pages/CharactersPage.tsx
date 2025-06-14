@@ -98,7 +98,7 @@ export default function CharactersPage() {
         {[
           { label: "Search", prop: search, set: setSearch },
           {
-            label: "Homeworld",
+            label: "Home World",
             prop: fHome,
             set: setFHome,
             opts: homeworlds,
@@ -174,6 +174,11 @@ export default function CharactersPage() {
           );
         })}
       </Grid>
+      {filtered.length < 1 && (
+        <Typography mt={2} textAlign="center">
+          No Result Found
+        </Typography>
+      )}
 
       <Box mt={3} display="flex" justifyContent="center" alignItems="center">
         <Button
@@ -201,7 +206,7 @@ export default function CharactersPage() {
             maxWidth={600}
             borderRadius={2}
           >
-            <Typography variant="h5" gutterBottom>
+            <Typography variant="h5" gutterBottom color="primary">
               {selected.name}
             </Typography>
             <Typography>
@@ -214,7 +219,7 @@ export default function CharactersPage() {
             <Typography>Films: {selected.films?.length}</Typography>
             <Typography>Birth Year: {selected.birth_year}</Typography>
             <Typography mt={2} variant="subtitle1">
-              Homeworld
+              Home World
             </Typography>
             <HomeWorldInfo url={selected.homeworld} />
           </Box>

@@ -72,6 +72,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setExpiresAt(expirationTime);
       localStorage.setItem("token", t);
       localStorage.setItem("expiresAt", expirationTime.toString());
+    } else {
+      alert("Invalid credentials");
     }
   }, []);
 

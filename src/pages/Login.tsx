@@ -21,11 +21,10 @@ const Login = () => {
         }}
       >
         <Typography>username: admin</Typography>
-        <Typography>password:12345</Typography>
+        <Typography>password: 12345</Typography>
       </Box>
       <Box
         sx={{
-          height: "100vh",
           width: "98vw",
           display: "flex",
           alignItems: "center",
