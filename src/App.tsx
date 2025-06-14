@@ -4,6 +4,8 @@ import { AuthProvider, useAuth } from "./hooks/useAuth";
 import { Header } from "./components/Header";
 import Login from "./pages/Login";
 import CharactersPage from "./pages/CharactersPage";
+import { ThemeProvider, CssBaseline } from "@mui/material";
+import { lightTheme } from "./theme";
 
 const queryClient = new QueryClient();
 
@@ -15,23 +17,27 @@ const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <BrowserRouter>
-          <Header />
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route
-              path="/characters"
-              element={
-                <PrivateRoute>
-                  <CharactersPage />
-                </PrivateRoute>
-              }
-            />
-            <Route path="/" element={<Navigate to="/characters" />} />
-          </Routes>
-        </BrowserRouter>
-      </AuthProvider>
+      <ThemeProvider theme={lightTheme}>
+        <CssBaseline />
+
+        <AuthProvider>
+          <BrowserRouter>
+            <Header />
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route
+                path="/characters"
+                element={
+                  <PrivateRoute>
+                    <CharactersPage />
+                  </PrivateRoute>
+                }
+              />
+              <Route path="/" element={<Navigate to="/characters" />} />
+            </Routes>
+          </BrowserRouter>
+        </AuthProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 };
