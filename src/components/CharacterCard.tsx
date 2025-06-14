@@ -30,7 +30,9 @@ export const CharacterCard = ({
     <CardActionArea>
       <Box
         component="img"
-        src={`https://picsum.photos/seed/${character.name}/300/200`}
+        src={`https://picsum.photos/seed/${encodeURIComponent(
+          character.name.replace(/\s+/g, "-")
+        )}/300/200`}
         alt={character.name}
         sx={{ width: "100%", height: 200, objectFit: "cover" }}
       />

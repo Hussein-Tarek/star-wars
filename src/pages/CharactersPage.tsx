@@ -27,6 +27,21 @@ const fetchPage = async (
 
 const fetchUrl = async (url: string) => axios.get(url).then((r) => r.data);
 
+export const speciesColors: Record<string, string> = {
+  Human: "#f5f5dc",
+  Droid: "#c0c0c0",
+  Wookiee: "#8b4513",
+  Rodian: "#006400",
+  Hutt: "#556b2f",
+  "Yoda's species": "#98fb98",
+  Trandoshan: "#cd853f",
+  "Mon Calamari": "#4682b4",
+  Ewok: "#deb887",
+  Sullustan: "#b0e0e6",
+  Neimodian: "#9acd32",
+  default: "#e0e0e0",
+};
+
 export default function CharactersPage() {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
@@ -37,7 +52,6 @@ export default function CharactersPage() {
 
   const { allHomeWorlds, allFilms, allSpecies, isLoadingLookups } =
     useAllLookups();
-
   const { data, isLoading, isError } = useQuery<PaginatedResponse<Character>>({
     queryKey: ["people", page],
     queryFn: () => fetchPage(page),
@@ -141,15 +155,24 @@ export default function CharactersPage() {
       </Grid>
 
       <Grid container spacing={2} mt={2} justifyContent={"center"}>
-        {filtered.map((c: Character) => (
-          <Grid size={{ xs: 8, sm: 4, md: 3, lg: 2 }} key={c.url}>
-            <CharacterCard
-              character={c}
-              onClick={(character: Character) => setSelected(character)}
-              speciesColor="white"
-            />
-          </Grid>
-        ))}
+        {filtered.map((c: Character) => {
+          const speciesName =
+            c.species.length && allSpecies[c.species[0]]
+              ? allSpecies[c.species[0]].name
+              : "default";
+
+          const speciesColor =
+            speciesColors[speciesName] || speciesColors["default"];
+          return (
+            <Grid size={{ xs: 8, sm: 4, md: 3, lg: 2 }} key={c.url}>
+              <CharacterCard
+                character={c}
+                onClick={(character: Character) => setSelected(character)}
+                speciesColor={speciesColor}
+              />
+            </Grid>
+          );
+        })}
       </Grid>
 
       <Box mt={3} display="flex" justifyContent="center" alignItems="center">
@@ -216,7 +239,7 @@ function HomeWorldInfo({ url }: { url: string }) {
       <Typography>Name: {data?.name}</Typography>
       <Typography>Terrain: {data?.terrain}</Typography>
       <Typography>Climate: {data?.climate}</Typography>
-      <Typography>Residents: {data?.residents?.length ?? "?"}</Typography>
+      <Typography>Residents: {data?.residents?.length ?? "-"}</Typography>
     </>
   );
 }

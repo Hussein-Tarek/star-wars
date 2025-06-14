@@ -10,48 +10,62 @@ const Login = () => {
   const [p, setP] = useState("");
 
   return (
-    <Box
-      sx={{
-        height: "100vh",
-        width: "100vw",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
+    <>
       <Box
-        display="flex"
-        flexDirection="column"
-        p={4}
-        maxWidth={400}
-        m="100px auto"
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+          mt: 2,
+        }}
       >
-        <Typography variant="h5">Login</Typography>
-        <TextField
-          label="Username"
-          value={u}
-          onChange={(e) => setU(e.target.value)}
-          sx={{ mt: 2 }}
-        />
-        <TextField
-          label="Password"
-          type="password"
-          value={p}
-          onChange={(e) => setP(e.target.value)}
-          sx={{ mt: 2 }}
-        />
-        <Button
-          sx={{ mt: 2 }}
-          variant="contained"
-          onClick={() => {
-            login(u, p);
-            navigate("/characters");
-          }}
-        >
-          Login
-        </Button>
+        <Typography>username: admin</Typography>
+        <Typography>password:12345</Typography>
       </Box>
-    </Box>
+      <Box
+        sx={{
+          height: "100vh",
+          width: "98vw",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Box
+          display="flex"
+          flexDirection="column"
+          p={4}
+          maxWidth={400}
+          m="100px auto"
+        >
+          <Typography variant="h5">Login</Typography>
+          <TextField
+            label="Username"
+            value={u}
+            onChange={(e) => setU(e.target.value)}
+            sx={{ mt: 2 }}
+          />
+          <TextField
+            label="Password"
+            type="password"
+            value={p}
+            onChange={(e) => setP(e.target.value)}
+            sx={{ mt: 2 }}
+          />
+          <Button
+            sx={{ mt: 2 }}
+            variant="contained"
+            onClick={() => {
+              login(u, p);
+              navigate("/characters");
+            }}
+          >
+            Login
+          </Button>
+        </Box>
+      </Box>
+    </>
   );
 };
 
